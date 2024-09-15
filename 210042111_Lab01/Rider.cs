@@ -24,7 +24,7 @@ namespace _210042111_Lab01
         public Trip RequestRide(string pickupLocation, string dropOffLocation, RideType rideType, double distance, int tripNumber)
         {
             Console.WriteLine($"{name} is requesting a {rideType.name} ride from {pickupLocation} to {dropOffLocation}.");
-            Trip trip = new Trip(tripNumber, this, pickupLocation, dropOffLocation, rideType, distance);
+            Trip trip = new Trip(tripNumber, this, pickupLocation, dropOffLocation, rideType, rideType.calculateFare(distance));
             NotificationService.sendNotification("Ride requested sent successfully", this, notificationMethod);
             return trip;
         }

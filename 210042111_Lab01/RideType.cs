@@ -12,7 +12,7 @@ namespace _210042111_Lab01
         {
         }
 
-        public abstract double calculateFare(double distance, DateTime tripTime);
+        public abstract double calculateFare(double distance);
     }
 
     public class Carpool : RideType
@@ -20,12 +20,12 @@ namespace _210042111_Lab01
         public Carpool()
         {
             this.name = "Carpool";
-            this.baseFare = 2.0;
+            this.baseFare = 20;
         }
 
-        public override double calculateFare(double distance, DateTime tripTime)
+        public override double calculateFare(double distance)
         {
-            double perMileRate = 0.5; 
+            double perMileRate = 5; 
             return baseFare + (distance * perMileRate);
         }
     }
@@ -35,12 +35,12 @@ namespace _210042111_Lab01
         public LuxuryRide()
         {
             this.name = "Luxury Ride";
-            this.baseFare = 5.0;
+            this.baseFare = 50;
         }
 
-        public override double calculateFare(double distance, DateTime tripTime)
+        public override double calculateFare(double distance)
         {
-            double perMileRate = 1.5; 
+            double perMileRate = 15; 
             return baseFare + (distance * perMileRate);
         }
     }
@@ -50,15 +50,15 @@ namespace _210042111_Lab01
         public BikeRide()
         {
             this.name = "Bike Ride";
-            this.baseFare = 1.0;
+            this.baseFare = 10;
         }
 
-        public override double calculateFare(double distance, DateTime tripTime)
+        public override double calculateFare(double distance)
         {
-            double perMileRate = 0.2; 
+            double perMileRate = 2; 
             return baseFare + (distance * perMileRate);
         }
-
+        //fare amount assumed in bdt
 
     }
 }
