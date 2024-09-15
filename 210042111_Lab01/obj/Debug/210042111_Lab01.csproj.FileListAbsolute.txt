@@ -1,0 +1,8 @@
+D:\junior\3-1\Design Pattern\labtasks\210042111_Lab01\bin\Debug\210042111_Lab01.exe.config
+D:\junior\3-1\Design Pattern\labtasks\210042111_Lab01\bin\Debug\210042111_Lab01.exe
+D:\junior\3-1\Design Pattern\labtasks\210042111_Lab01\bin\Debug\210042111_Lab01.pdb
+D:\junior\3-1\Design Pattern\labtasks\210042111_Lab01\obj\Debug\210042111_Lab01.csproj.AssemblyReference.cache
+D:\junior\3-1\Design Pattern\labtasks\210042111_Lab01\obj\Debug\210042111_Lab01.csproj.SuggestedBindingRedirects.cache
+D:\junior\3-1\Design Pattern\labtasks\210042111_Lab01\obj\Debug\210042111_Lab01.csproj.CoreCompileInputs.cache
+D:\junior\3-1\Design Pattern\labtasks\210042111_Lab01\obj\Debug\210042111_Lab01.exe
+D:\junior\3-1\Design Pattern\labtasks\210042111_Lab01\obj\Debug\210042111_Lab01.pdb
