@@ -113,6 +113,7 @@ namespace _210042111_Lab01
 
             Console.WriteLine("-----------------------press key to end the program--------------------------");
             Console.ReadKey();
+            //all the locations are set to bd places
           
         }
     }
