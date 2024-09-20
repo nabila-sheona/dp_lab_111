@@ -12,6 +12,9 @@ namespace _210042111_Lab01
         public PaymentMethod preferredPaymentMethod { get; set; }
         public NotificationType notificationMethod { get; set; }
 
+                public Trip trip;
+
+        public Admin admin;
         public Rider(int id, string name, NotificationType notificationMethod)
         {
             this.id = id;
@@ -21,13 +24,30 @@ namespace _210042111_Lab01
             this.notificationMethod = notificationMethod;
         }
 
-        public Trip RequestRide(string pickupLocation, string dropOffLocation, RideType rideType, double distance, int tripNumber)
+
+       
+        public void RequestRide(string pickupLocation, string dropOffLocation, RideType rideType, double distance, int tripNumber, Admin admin)
         {
+            this.admin = admin;
             Console.WriteLine($"{name} is requesting a {rideType.name} ride from {pickupLocation} to {dropOffLocation}.");
-            Trip trip = new Trip(tripNumber, this, pickupLocation, dropOffLocation, rideType, rideType.calculateFare(distance));
+            trip = new Trip(tripNumber, this, rideType, rideType.calculateFare(distance));
             NotificationService.sendNotification("Ride requested sent successfully", this, notificationMethod);
-            return trip;
+
+            if (trip.callTrip(admin, this, pickupLocation, dropOffLocation) == true)
+            {
+                {
+                    trip.afterTripRider(5.0);
+
+                    trip.ratingRider(5.0);
+
+                }
+            }
+
         }
+
+
+            
+
 
         public void makePayment(Trip trip, double rating)
         {

@@ -39,30 +39,18 @@ namespace _210042111_Lab01
             admin.manageRider(rider2, true);
             Console.WriteLine("-------------------trip1----------------------");
            
-            Trip trip1 = rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 101);
+rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 101, admin);
 
-
-            if (trip1.callTrip(admin, rider2) == true)
-            {
-                trip1.afterTripRider(5.0);
-
-                trip1.ratingRider(5.0);
-
-            }
-
+          
             Console.WriteLine("-------------------------------------------------");
 
 
             Console.WriteLine("-------------------trip2----------------------");
 
-            Trip trip2 = rider2.RequestRide("Bailey Road", "Gulshan Avenue", luxuryRide, 12.0, 102);
-            if (trip2.callTrip(admin, rider2) == true)
-            {
-                trip2.afterTripRider(5.0);
+            rider2.RequestRide("Bailey Road", "Gulshan Avenue", luxuryRide, 12.0, 102, admin);
 
-                trip2.ratingRider(5.0);
+         
 
-            }
 
             Console.WriteLine("-------------------------------------------------");
 
@@ -78,30 +66,18 @@ namespace _210042111_Lab01
 
             Console.WriteLine("-------------------trip3----------------------");
 
-            Trip trip3 = rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 103);
-           
+           rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 103, admin);
 
-
-            if (trip3.callTrip(admin, rider2) == true)
-            {
-                trip3.afterTripRider(4.0);
-
-                trip3.ratingRider(4.0);
-
-            }
+        
 
             Console.WriteLine("-------------------------------------------------");
             Console.WriteLine("-------------------trip4----------------------");
 
-            Trip trip4 = rider2.RequestRide("Bailey Road", "Gulshan Avenue", luxuryRide, 12.0, 104);
+            rider2.RequestRide("Bailey Road", "Gulshan Avenue", luxuryRide, 12.0, 104, admin);
 
-            if (trip4.callTrip(admin, rider2) == true)
-            {
-                trip4.afterTripRider(5.0);
 
-                trip4.ratingRider(5.0);
+     
 
-            }
 
             Console.WriteLine("-------------------------------------------------");
             Console.WriteLine("-----------------------press key to see details--------------------------");

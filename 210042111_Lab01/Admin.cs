@@ -93,7 +93,7 @@ namespace _210042111_Lab01
             }
         }
 
-        public bool assignTrip(Trip trip)
+        public bool assignTrip(Trip trip, string pickuplocation)
         {
             if (trip == null)
             {
@@ -103,7 +103,7 @@ namespace _210042111_Lab01
 
             
             var availableDriver = drivers
-                .Where(d => d.isAvailable && d.location == trip.pickupLocation)
+                .Where(d => d.isAvailable && d.location == pickuplocation)
                 .FirstOrDefault();
 
             if (availableDriver == null)

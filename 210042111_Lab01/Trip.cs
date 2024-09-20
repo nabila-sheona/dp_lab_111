@@ -14,22 +14,23 @@ namespace _210042111_Lab01
         public bool isCompleted { get;  set; } = false;
         public Admin admin { get; set; }
 
-        public Trip(int id, Rider rider, string pickupLocation, string dropOffLocation, RideType rideType, double fare)
+        public Trip(int id, Rider rider, RideType rideType, double fare)
         {
             this.id = id;
             this.rider = rider;
-            this.pickupLocation = pickupLocation;
-            this.dropOffLocation = dropOffLocation;
+            
             this.rideType = rideType;
             this.fare = fare;
            
         }
 
 
-        public bool callTrip(Admin admin, Rider rider)
+        public bool callTrip(Admin admin, Rider rider, string pickupLocation, string dropOffLocation)
         {
             this.admin = admin;
-            if (admin.assignTrip(this) == true)
+            this.pickupLocation= pickupLocation;
+            this.dropOffLocation= dropOffLocation;
+            if (admin.assignTrip(this, pickupLocation) == true)
             {
                 startTrip();
                 completeTrip();
@@ -38,7 +39,7 @@ namespace _210042111_Lab01
             }
             else
             {
-                Console.WriteLine($"Trip {this.id} was cancelled due to no available driver.");
+                Console.WriteLine($"Trip {this} was cancelled due to no available driver.");
                 return false;
             }
    
