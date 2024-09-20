@@ -74,7 +74,23 @@ namespace _210042111_Lab01
             driver.isAvailable = true;
             driver.updateLocation(admin, dropOffLocation);
         }
+        public void callRate()
+        {
+            Console.WriteLine("rider give the rate between 1 and 5 else default rate will go");
+            double rate = Convert.ToDouble(Console.ReadLine());
+            if (rate >= 1 && rate <= 5)
+            {
+                afterTripRider(rate);
+            }
 
+            Console.WriteLine("driver give the rate between 1 and 5 else default rate will go");
+            rate = Convert.ToDouble(Console.ReadLine());
+            if (rate >= 1 && rate <= 5)
+            {
+                ratingRider(rate);
+            }
+
+        }
 
         public void afterTripRider(double rate)
         {

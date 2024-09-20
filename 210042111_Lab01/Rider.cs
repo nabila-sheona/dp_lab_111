@@ -36,10 +36,7 @@ namespace _210042111_Lab01
             if (trip.callTrip(admin, this, pickupLocation, dropOffLocation) == true)
             {
                 {
-                    trip.afterTripRider(5.0);
-
-                    trip.ratingRider(5.0);
-
+                    trip.callRate();
                 }
             }
 
