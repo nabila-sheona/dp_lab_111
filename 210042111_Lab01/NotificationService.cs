@@ -34,12 +34,12 @@ namespace _210042111_Lab01
 
         private static void sendSMS(string message, User recipient)
         {
-            Console.WriteLine($"SMS to {recipient.name}: {message}");
+            Console.WriteLine($"SMS to : {message}");
         }
 
         private static void sendEmail(string message, User recipient)
         {
-            Console.WriteLine($"Email to {recipient.name}: {message}");
+            Console.WriteLine($"SMS to : {message}");
         }
 
       //add more functions if more methods of sending noti. is added to the system

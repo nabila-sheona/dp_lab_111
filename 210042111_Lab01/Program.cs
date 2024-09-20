@@ -39,7 +39,7 @@ namespace _210042111_Lab01
             admin.manageRider(rider2, true);
             Console.WriteLine("-------------------trip1----------------------");
            
-rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 101, admin);
+            rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 101, admin);
 
           
             Console.WriteLine("-------------------------------------------------");
@@ -76,7 +76,7 @@ rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 101, 
             rider2.RequestRide("Bailey Road", "Gulshan Avenue", luxuryRide, 12.0, 104, admin);
 
 
-     
+      
 
 
             Console.WriteLine("-------------------------------------------------");
@@ -94,10 +94,10 @@ rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 101, 
         }
     }
 
-    public interface User
+    public abstract class User
     {
-        string name { get; }
-        NotificationType notificationMethod { get; }
+       string name { get; }
+       NotificationType notificationMethod { get; }
     }
 
 
