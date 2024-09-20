@@ -37,6 +37,13 @@ namespace _210042111_Lab01
             };
             admin.manageRider(rider1, true);
             admin.manageRider(rider2, true);
+
+
+
+
+
+
+            //trip1
             Console.WriteLine("-------------------trip1----------------------");
            
             rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 101, admin);
@@ -45,51 +52,85 @@ namespace _210042111_Lab01
             Console.WriteLine("-------------------------------------------------");
 
 
+           
+            
+            
+            //trip2
             Console.WriteLine("-------------------trip2----------------------");
 
             rider2.RequestRide("Bailey Road", "Gulshan Avenue", luxuryRide, 12.0, 102, admin);
 
-         
-
-
+        
             Console.WriteLine("-------------------------------------------------");
 
             Console.WriteLine("-----------------------press key to see details--------------------------");
+
             Console.ReadKey();
 
+
+
+
+            //history check
+
             admin.tripHistory();
+
 
             Console.WriteLine("-----------------------press key to continue--------------------------");
             Console.ReadKey();
 
+
+
+
+
+
+            //driver new location
+            
             driver2.updateLocation(admin, "123 Motijheel");
 
+            
+            
+            
+            
+            
+            //ride3
+            
             Console.WriteLine("-------------------trip3----------------------");
 
            rider1.RequestRide("123 Motijheel", "56 Siddeshawari Road", carpool, 10.0, 103, admin);
 
         
+            
 
+
+            //ride 4
             Console.WriteLine("-------------------------------------------------");
             Console.WriteLine("-------------------trip4----------------------");
 
             rider2.RequestRide("Bailey Road", "Gulshan Avenue", luxuryRide, 12.0, 104, admin);
 
-
-      
-
-
             Console.WriteLine("-------------------------------------------------");
             Console.WriteLine("-----------------------press key to see details--------------------------");
 
             Console.ReadKey();
+
+
+
+
+
+
+
+
+            //end program
             admin.seeRiders();
             admin.seeDrivers();
             admin.tripHistory();
 
             Console.WriteLine("-----------------------press key to end the program--------------------------");
             Console.ReadKey();
-            //all the locations are set to bd places
+            
+
+
+
           
         }
     }
@@ -102,3 +143,16 @@ namespace _210042111_Lab01
 
 
 }
+
+
+
+
+
+
+
+
+//dp patterns:
+
+//1. strategy pattern: can be applied on notification system, payment system  status: yet to apply
+
+
