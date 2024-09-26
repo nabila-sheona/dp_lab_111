@@ -136,24 +136,57 @@ namespace _210042111_Lab01
             driver.updateLocation(admin, dropOffLocation);
             ProcessPayment();
         }
-    
+
         public void callRate()
         {
-            Console.WriteLine("rider give the rate between 1 and 5 else default rate will go");
-            double rate = Convert.ToDouble(Console.ReadLine());
-            if (rate >= 1 && rate <= 5)
+            double riderRate = GetValidRating("rider");
+            if (riderRate >= 1 && riderRate <= 5)
             {
-                afterTripRider(rate);
+                afterTripRider(riderRate);
             }
 
-            Console.WriteLine("driver give the rate between 1 and 5 else default rate will go");
-            rate = Convert.ToDouble(Console.ReadLine());
-            if (rate >= 1 && rate <= 5)
+            double driverRate = GetValidRating("driver");
+            if (driverRate >= 1 && driverRate <= 5)
             {
-                ratingRider(rate);
+                ratingRider(driverRate);
             }
-
         }
+
+      
+        private double GetValidRating(string role)
+        {
+            double rating;
+            while (true)
+            {
+                Console.WriteLine($"{role} give the rate between 1 and 5 else default rate will go:");
+                string input = Console.ReadLine();
+
+              
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Input cannot be empty. Please enter a rating.");
+                    continue;
+                }
+
+                
+                if (double.TryParse(input, out rating))
+                {
+                    if (rating >= 1 && rating <= 5)
+                    {
+                        return rating;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Rating must be between 1 and 5. Please try again.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a numeric rating.");
+                }
+            }
+        }
+
 
         public void afterTripRider(double rate)
         {

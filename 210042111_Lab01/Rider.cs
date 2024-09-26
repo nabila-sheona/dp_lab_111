@@ -41,17 +41,12 @@ namespace _210042111_Lab01
 
 
       
-        // Change payment method before the end of the ride
-        public void changePaymentMethod(IPaymentMethod newPaymentMethod)
-        {
-            this.preferredPaymentMethod = newPaymentMethod;
-            Console.WriteLine($"{name} has changed the payment method to {newPaymentMethod.GetType().Name}.");
-        }
+    
 
         public void makePayment(Trip trip, double rate)
         {
             Console.WriteLine($"{name} is making payment of {trip.fare:C} for Trip {trip.id}.");
-            preferredPaymentMethod.processPayment(trip.fare);
+          
             rateDriver(trip.driver, rating);
         }
 
