@@ -13,7 +13,6 @@ namespace _210042111_Lab01
         public string cardNumber { get; set; }
         public string cardHolderName { get; set; }
 
-        // Constructor for CreditCard
         public CreditCard(string cardNumber, string cardHolderName)
         {
             this.cardNumber = cardNumber;
@@ -26,12 +25,12 @@ namespace _210042111_Lab01
         }
     }
 
-    // Bkash Class (moved out of CreditCard)
+  
     public class Bkash : IPaymentMethod
     {
         public string phoneNumber { get; set; }
 
-        // Constructor for Bkash
+      
         public Bkash(string phoneNumber)
         {
             this.phoneNumber = phoneNumber;
