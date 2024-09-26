@@ -16,7 +16,7 @@ namespace _210042111_Lab01
         public Rider rider { get;  set; }
         public bool isCompleted { get;  set; } = false;
         public Admin admin { get; set; }
-
+        private IPaymentMethod paymentMethod;
         public Trip(int id, Rider rider, RideType rideType, double fare)
         {
             this.id = id;
@@ -27,6 +27,50 @@ namespace _210042111_Lab01
            
         }
 
+        private void SetPaymentType()
+        {
+            Console.WriteLine("Choose a payment method:");
+            Console.WriteLine("1. Credit Card");
+            Console.WriteLine("2. Digital Wallet");
+            Console.WriteLine("3. Bkash");
+
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Enter card number:");
+                    string cardNumber = Console.ReadLine();
+                    Console.WriteLine("Enter cardholder name:");
+                    string cardHolderName = Console.ReadLine();
+                    paymentMethod = new CreditCard(cardNumber, cardHolderName);
+                    break;
+                case 2:
+                    Console.WriteLine("Enter wallet number:");
+                    string walletId = Console.ReadLine();
+                    paymentMethod = new DigitalWallet(walletId);
+                    break;
+                case 3:
+                    Console.WriteLine("Enter phone number:");
+                    string phone = Console.ReadLine();
+                    paymentMethod = new Bkash(phone);
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice, no payment method selected.");
+                    break;
+            }
+        }
+
+        private void ProcessPayment()
+        {
+            if (paymentMethod != null)
+            {
+                paymentMethod.processPayment(fare);
+            }
+            else
+            {
+                Console.WriteLine("No payment method selected.");
+            }
+        }
 
         public bool callTrip(Admin admin, Rider rider, string pickupLocation, string dropOffLocation)
         {
@@ -35,8 +79,8 @@ namespace _210042111_Lab01
             this.dropOffLocation= dropOffLocation;
             if (admin.assignTrip(this, pickupLocation) == true)
             {
-                startTrip(rider);
-                completeTrip(rider);
+                startTrip();
+                completeTrip();
                 return true;
                
             }
@@ -56,61 +100,30 @@ namespace _210042111_Lab01
             driver.acceptRide(this, admin);
         }
 
-      
-
-        
-        public void paymentType(Rider rider)
-        {
-            Console.WriteLine("Choose a new payment method:");
-            Console.WriteLine("1. Credit Card");
-            Console.WriteLine("2. Digital Wallet");
-            Console.WriteLine("3. Bkash");
-
-            int newChoice = Convert.ToInt32(Console.ReadLine());
-            if (newChoice == 1)
-            {
-                Console.WriteLine("Enter card number:");
-                string cardNumber = Console.ReadLine();
-
-                Console.WriteLine("Enter cardholder name:");
-                string cardHolderName = Console.ReadLine();
-
-                rider.changePaymentMethod(new CreditCard(cardNumber, cardHolderName));
-            }
-            else if (newChoice == 2)
-            {
-                Console.WriteLine("Enter wallet number:");
-                string WalletId = Console.ReadLine();
-
-                rider.changePaymentMethod(new DigitalWallet(WalletId));
-            }
-            else if (newChoice == 3)
-            {
-                Console.WriteLine("Enter phone number:");
-                string phone = Console.ReadLine();
-
-                rider.changePaymentMethod(new Bkash(phone));
-            }
-        }
 
 
-        public void startTrip(Rider rider)
-        {
-            paymentType(rider);
+    
+
      
 
+        public void startTrip()
+        {
+            SetPaymentType();
             Console.WriteLine($"Trip {id} started from {pickupLocation} to {dropOffLocation}.");
-
-         
+           
         }
-        public void completeTrip(Rider rider)
+
+        
+
+     
+        public void completeTrip()
         {
             Console.WriteLine("Do you want to change your payment method? (y/n)");
             string change = Console.ReadLine();
 
             if (change.ToLower() == "y")
             {
-                paymentType(rider);
+                 SetPaymentType();
             }
 
                 isCompleted = true;
@@ -121,8 +134,9 @@ namespace _210042111_Lab01
 
             driver.isAvailable = true;
             driver.updateLocation(admin, dropOffLocation);
+            ProcessPayment();
         }
-      
+    
         public void callRate()
         {
             Console.WriteLine("rider give the rate between 1 and 5 else default rate will go");
