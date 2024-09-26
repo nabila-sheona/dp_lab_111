@@ -4,12 +4,9 @@ namespace _210042111_Lab01
 {
     public class Rider : User
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string location { get; set; }
-        public double rating { get; set; }
-        public int totalTrips { get; set; }
-        public PaymentMethod preferredPaymentMethod { get; set; }
+       
+       
+        public IPaymentMethod preferredPaymentMethod { get; set; }
         public NotificationType notificationMethod { get; set; }
 
                 public Trip trip;
@@ -43,20 +40,25 @@ namespace _210042111_Lab01
         }
 
 
-            
-
-
-        public void makePayment(Trip trip, double rating)
+      
+        // Change payment method before the end of the ride
+        public void changePaymentMethod(IPaymentMethod newPaymentMethod)
         {
-            Console.WriteLine($"{name} is making payment for trip {trip.id} using {preferredPaymentMethod.GetType().Name}.");
-            preferredPaymentMethod.processPayment(trip.fare);
+            this.preferredPaymentMethod = newPaymentMethod;
+            Console.WriteLine($"{name} has changed the payment method to {newPaymentMethod.GetType().Name}.");
+        }
 
-         
+        public void makePayment(Trip trip, double rate)
+        {
+            Console.WriteLine($"{name} is making payment of {trip.fare:C} for Trip {trip.id}.");
+            preferredPaymentMethod.processPayment(trip.fare);
             rateDriver(trip.driver, rating);
         }
 
+
        public void rateDriver(Driver driver, double rating)
         {
+            
             Console.WriteLine($"{name} rated driver {driver.name} with {rating} stars.");
             driver.updateRating(rating);
         }

@@ -26,15 +26,9 @@ namespace _210042111_Lab01
             RideType carpool = new Carpool();
             RideType luxuryRide = new LuxuryRide();
 
-            Rider rider1 = new Rider(1, "Lourena Chowdhury", NotificationType.Email)
-            {
-                preferredPaymentMethod = new CreditCard { cardNumber = "1234-5678-9012-3456", cardHolderName = "Lourena Chowdhury" }
-            };
+            Rider rider1 = new Rider(1, "Lourena Chowdhury", NotificationType.Email);
 
-            Rider rider2 = new Rider(2, "Athena", NotificationType.SMS)
-            {
-                preferredPaymentMethod = new DigitalWallet { walletId = "1234-5678-9012-3456" }
-            };
+            Rider rider2 = new Rider(2, "Athena", NotificationType.SMS);
             admin.manageRider(rider1, true);
             admin.manageRider(rider2, true);
 
@@ -137,8 +131,13 @@ namespace _210042111_Lab01
 
     public abstract class User
     {
-       string name { get; }
-       NotificationType notificationMethod { get; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string location { get; set; }
+        public double rating { get; set; }
+
+        public int totalTrips { get; set; }
+        NotificationType notificationMethod { get; }
     }
 
 
@@ -153,6 +152,6 @@ namespace _210042111_Lab01
 
 //dp patterns:
 
-//1. strategy pattern: can be applied on notification system, payment system  status: yet to apply
+//1. strategy pattern: can be applied on notification system, payment system maybe ridetype status: yet to apply
 
 

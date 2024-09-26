@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Net;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace _210042111_Lab01
 {
@@ -32,8 +35,8 @@ namespace _210042111_Lab01
             this.dropOffLocation= dropOffLocation;
             if (admin.assignTrip(this, pickupLocation) == true)
             {
-                startTrip();
-                completeTrip();
+                startTrip(rider);
+                completeTrip(rider);
                 return true;
                
             }
@@ -53,27 +56,73 @@ namespace _210042111_Lab01
             driver.acceptRide(this, admin);
         }
 
+      
 
-        public void startTrip()
+        
+        public void paymentType(Rider rider)
         {
-            if (driver.location == pickupLocation)
+            Console.WriteLine("Choose a new payment method:");
+            Console.WriteLine("1. Credit Card");
+            Console.WriteLine("2. Digital Wallet");
+            Console.WriteLine("3. Bkash");
+
+            int newChoice = Convert.ToInt32(Console.ReadLine());
+            if (newChoice == 1)
             {
-                Console.WriteLine($"Trip {id} started from {pickupLocation} to {dropOffLocation}.");
+                Console.WriteLine("Enter card number:");
+                string cardNumber = Console.ReadLine();
+
+                Console.WriteLine("Enter cardholder name:");
+                string cardHolderName = Console.ReadLine();
+
+                rider.changePaymentMethod(new CreditCard(cardNumber, cardHolderName));
+            }
+            else if (newChoice == 2)
+            {
+                Console.WriteLine("Enter wallet number:");
+                string WalletId = Console.ReadLine();
+
+                rider.changePaymentMethod(new DigitalWallet(WalletId));
+            }
+            else if (newChoice == 3)
+            {
+                Console.WriteLine("Enter phone number:");
+                string phone = Console.ReadLine();
+
+                rider.changePaymentMethod(new Bkash(phone));
             }
         }
 
-        public void completeTrip()
+
+        public void startTrip(Rider rider)
         {
-           
-            isCompleted = true;
-           
-            
+            paymentType(rider);
+     
+
+            Console.WriteLine($"Trip {id} started from {pickupLocation} to {dropOffLocation}.");
+
+         
+        }
+        public void completeTrip(Rider rider)
+        {
+            Console.WriteLine("Do you want to change your payment method? (y/n)");
+            string change = Console.ReadLine();
+
+            if (change.ToLower() == "y")
+            {
+                paymentType(rider);
+            }
+
+                isCompleted = true;
+
+
             Console.WriteLine($"Trip {id} completed.");
 
-           
+
             driver.isAvailable = true;
             driver.updateLocation(admin, dropOffLocation);
         }
+      
         public void callRate()
         {
             Console.WriteLine("rider give the rate between 1 and 5 else default rate will go");
