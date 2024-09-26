@@ -173,7 +173,7 @@ namespace _210042111_Lab01
                 {
                     if (rating >= 1 && rating <= 5)
                     {
-                        return rating;
+                        return rating; // Valid rating, return it
                     }
                     else
                     {
