@@ -43,8 +43,9 @@ namespace _210042111_Lab01
 
         public void startTrip(Trip trip)
         {
-            //trip.startTrip();
+            
             Console.WriteLine($"Driver {name} has started the trip.");
+            trip.startTrip();
         }
 
         public void updateLocation(Admin admin, string newLocation)

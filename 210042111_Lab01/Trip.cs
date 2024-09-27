@@ -17,6 +17,9 @@ namespace _210042111_Lab01
         public bool isCompleted { get;  set; } = false;
         public Admin admin { get; set; }
         private IPaymentMethod paymentMethod;
+        string paymentStrategy;
+
+        public SetPayment setPayment;
         public Trip(int id, Rider rider, RideType rideType, double fare)
         {
             this.id = id;
@@ -24,73 +27,45 @@ namespace _210042111_Lab01
             
             this.rideType = rideType;
             this.fare = fare;
-           
+            setPayment = new SetPayment();
+
         }
 
-        private void SetPaymentType()
-        {
-            Console.WriteLine("Choose a payment method:");
-            Console.WriteLine("1. Credit Card");
-            Console.WriteLine("2. Digital Wallet");
-            Console.WriteLine("3. Bkash");
 
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
-            {
-                case 1:
-                    Console.WriteLine("Enter card number:");
-                    string cardNumber = Console.ReadLine();
-                    Console.WriteLine("Enter cardholder name:");
-                    string cardHolderName = Console.ReadLine();
-                    paymentMethod = new CreditCard(cardNumber, cardHolderName);
-                    break;
-                case 2:
-                    Console.WriteLine("Enter wallet number:");
-                    string walletId = Console.ReadLine();
-                    paymentMethod = new DigitalWallet(walletId);
-                    break;
-                case 3:
-                    Console.WriteLine("Enter phone number:");
-                    string phone = Console.ReadLine();
-                    paymentMethod = new Bkash(phone);
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice, no payment method selected.");
-                    break;
-            }
-        }
 
-        private void ProcessPayment()
-        {
-            if (paymentMethod != null)
-            {
-                paymentMethod.processPayment(fare);
-            }
-            else
-            {
-                Console.WriteLine("No payment method selected.");
-            }
-        }
 
         public bool callTrip(Admin admin, Rider rider, string pickupLocation, string dropOffLocation)
         {
             this.admin = admin;
-            this.pickupLocation= pickupLocation;
-            this.dropOffLocation= dropOffLocation;
-            if (admin.assignTrip(this, pickupLocation) == true)
+            this.pickupLocation = pickupLocation;
+            this.dropOffLocation = dropOffLocation;
+
+            
+            paymentMethod = setPayment.SetPaymentType();
+
+            if (paymentMethod == null)
+            {
+                Console.WriteLine("No payment method was selected. Trip cannot proceed.");
+                return false;
+            }
+
+            if (admin.assignTrip(this, pickupLocation))
             {
                 startTrip();
                 completeTrip();
+                paymentMethod.processPayment(fare);
+                callRate();
+                driver.updateLocation(admin, dropOffLocation);
+
                 return true;
-               
             }
             else
             {
                 Console.WriteLine($"Trip {this} was cancelled due to no available driver.");
                 return false;
             }
-   
         }
+
         public void assignDriver(Driver driver, Admin admin)
         {
            
@@ -101,21 +76,16 @@ namespace _210042111_Lab01
         }
 
 
-
-    
-
      
 
         public void startTrip()
         {
-            SetPaymentType();
+           
             Console.WriteLine($"Trip {id} started from {pickupLocation} to {dropOffLocation}.");
            
         }
 
-        
-
-     
+            
         public void completeTrip()
         {
             Console.WriteLine("Do you want to change your payment method? (y/n)");
@@ -123,7 +93,7 @@ namespace _210042111_Lab01
 
             if (change.ToLower() == "y")
             {
-                 SetPaymentType();
+                 setPayment.SetPaymentType();
             }
 
                 isCompleted = true;
@@ -133,8 +103,7 @@ namespace _210042111_Lab01
 
 
             driver.isAvailable = true;
-            driver.updateLocation(admin, dropOffLocation);
-            ProcessPayment();
+           
         }
 
         public void callRate()

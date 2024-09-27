@@ -10,7 +10,7 @@ namespace _210042111_Lab01
     {
       
             void processPayment(double amount);
-        
+        void ProcessPayment();
 
     }
 

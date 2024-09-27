@@ -29,13 +29,13 @@ namespace _210042111_Lab01
             Console.WriteLine($"{name} is requesting a {rideType.name} ride from {pickupLocation} to {dropOffLocation}.");
             trip = new Trip(tripNumber, this, rideType, rideType.calculateFare(distance));
             NotificationService.sendNotification("Ride requested sent successfully", this, notificationMethod);
-
-            if (trip.callTrip(admin, this, pickupLocation, dropOffLocation) == true)
-            {
-                {
-                    trip.callRate();
-                }
-            }
+            trip.callTrip(admin, this, pickupLocation, dropOffLocation);
+            //if (trip.callTrip(admin, this, pickupLocation, dropOffLocation) == true)
+            //{
+            //  {
+            //    trip.callRate();
+            //}
+            //}
 
         }
 
