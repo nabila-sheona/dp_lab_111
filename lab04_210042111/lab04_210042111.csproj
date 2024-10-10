@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5053ED22-4699-4BBF-8EF9-FE49FC41A3EA}</ProjectGuid>
+    <ProjectGuid>{A54028F6-482D-4CB1-ADEB-F2C3A4FDB933}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>lab02_210042111</RootNamespace>
-    <AssemblyName>lab02_210042111</AssemblyName>
+    <RootNamespace>lab04_210042111</RootNamespace>
+    <AssemblyName>lab04_210042111</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,14 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AESEncryption.cs" />
-    <Compile Include="CaeserCipher.cs" />
-    <Compile Include="DESEncryption .cs" />
-    <Compile Include="EncryptionContext.cs" />
-    <Compile Include="FileHandler.cs" />
-    <Compile Include="IEncryption.cs" />
+    <Compile Include="Americano.cs" />
+    <Compile Include="Cappuccino.cs" />
+    <Compile Include="Cream.cs" />
+    <Compile Include="Espresso.cs" />
+    <Compile Include="IBeverage.cs" />
+    <Compile Include="ICondimentDecorator.cs" />
+    <Compile Include="Latte.cs" />
+    <Compile Include="Milk.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sugar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

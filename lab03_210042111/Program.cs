@@ -30,7 +30,7 @@ namespace lab02_210042111
                 case "1":
                     Console.WriteLine("Enter a 16-character key for AES:");
                     key = Console.ReadLine();
-                    encryptionContext.SetEncryptionStrategy(new aesEncryption(key));
+                    encryptionContext.SetEncryptionStrategy(new AESEncryption(key));
                     break;
 
                 case "2":

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace lab02_210042111
 {
-    public class aesEncryption : IEncryption
+    public class AESEncryption : IEncryption
     {
         private string key;
 
-        public aesEncryption(string key)
+        public AESEncryption(string key)
         {
             this.key = key;
         }
