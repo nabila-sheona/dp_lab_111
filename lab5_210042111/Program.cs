@@ -14,11 +14,7 @@ namespace lab5_210042111
 
 
             BundleChild techBundle = new BundleChild("Tech Bundle 1", "A bundle with electronics", 10);
-            
-
            
-
-
 
             techBundle.DisplayProductInfo();
             Console.WriteLine($"Total Price: ${techBundle.CalculatePrice()}");
