@@ -10,7 +10,7 @@ namespace lab06_210042111
     {
         public void SendNotification(string message, string recipient)
         {
-            Console.WriteLine($"Sending Email to {recipient}: {message}");
+            Console.WriteLine($"Sending phone to {recipient}: {message}");
         }
     }
 }

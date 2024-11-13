@@ -1,0 +1,16 @@
+D:\junior\3-1\Design Pattern\final\lab07_210042111\bin\Debug\lab07_210042111.exe.config
+D:\junior\3-1\Design Pattern\final\lab07_210042111\bin\Debug\lab07_210042111.exe
+D:\junior\3-1\Design Pattern\final\lab07_210042111\bin\Debug\lab07_210042111.pdb
+D:\junior\3-1\Design Pattern\final\lab07_210042111\obj\Debug\lab07_210042111.csproj.AssemblyReference.cache
+D:\junior\3-1\Design Pattern\final\lab07_210042111\obj\Debug\lab07_210042111.csproj.SuggestedBindingRedirects.cache
+D:\junior\3-1\Design Pattern\final\lab07_210042111\obj\Debug\lab07_210042111.csproj.CoreCompileInputs.cache
+D:\junior\3-1\Design Pattern\final\lab07_210042111\obj\Debug\lab07_210042111.exe
+D:\junior\3-1\Design Pattern\final\lab07_210042111\obj\Debug\lab07_210042111.pdb
+D:\junior\3-1\Design Pattern\lab07_210042111\bin\Debug\lab07_210042111.exe.config
+D:\junior\3-1\Design Pattern\lab07_210042111\bin\Debug\lab07_210042111.exe
+D:\junior\3-1\Design Pattern\lab07_210042111\bin\Debug\lab07_210042111.pdb
+D:\junior\3-1\Design Pattern\lab07_210042111\obj\Debug\lab07_210042111.csproj.AssemblyReference.cache
+D:\junior\3-1\Design Pattern\lab07_210042111\obj\Debug\lab07_210042111.csproj.SuggestedBindingRedirects.cache
+D:\junior\3-1\Design Pattern\lab07_210042111\obj\Debug\lab07_210042111.csproj.CoreCompileInputs.cache
+D:\junior\3-1\Design Pattern\lab07_210042111\obj\Debug\lab07_210042111.exe
+D:\junior\3-1\Design Pattern\lab07_210042111\obj\Debug\lab07_210042111.pdb
