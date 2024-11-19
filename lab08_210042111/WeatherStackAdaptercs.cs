@@ -13,7 +13,7 @@ namespace lab08_210042111
 
         string ApiKey = "309d469af3c87de70e7d58bfa498d1e9";  
 
-        public async Task<WeatherData> GetWeatherAsync(double latitude, double longitude, string cityName)
+        public async Task<WeatherData> GetWeather(string cityName)
         {
             string apiUrl = $"http://api.weatherstack.com/current?access_key={ApiKey}&query={cityName}";
             string response = await SendGetRequestAsync(apiUrl);
@@ -22,7 +22,7 @@ namespace lab08_210042111
             string weatherCondition = json["current"]["weather_descriptions"][0].ToString();
             double temperature = (double)json["current"]["temperature"];
 
-            return new WeatherData(cityName, latitude, longitude, weatherCondition, temperature);
+            return new WeatherData(cityName, weatherCondition, temperature);
         }
 
         private async Task<string> SendGetRequestAsync(string apiUrl)

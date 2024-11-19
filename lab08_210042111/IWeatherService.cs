@@ -8,7 +8,7 @@ namespace lab08_210042111
 {
     public interface IWeatherService
     {
-        Task<WeatherData> GetWeatherAsync(double latitude, double longitude, string cityName);
+        Task<WeatherData> GetWeather(string cityName);
 
     }
 }

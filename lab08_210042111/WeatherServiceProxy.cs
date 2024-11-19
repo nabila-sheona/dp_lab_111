@@ -1,8 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace lab08_210042111
@@ -11,7 +8,7 @@ namespace lab08_210042111
     {
         private readonly IWeatherService weatherService;
         private readonly Dictionary<string, WeatheCache> cache = new Dictionary<string, WeatheCache>();
-        private static TimeSpan CacheDuration = TimeSpan.FromMinutes(10);
+        private static readonly TimeSpan CacheDuration = TimeSpan.FromMinutes(10);
         private static readonly TimeSpan RateLimitDuration = TimeSpan.FromSeconds(30);
 
         public WeatherServiceProxy(IWeatherService weatherService)
@@ -19,26 +16,30 @@ namespace lab08_210042111
             this.weatherService = weatherService;
         }
 
-        public async Task<WeatherData> GetWeatherAsync(double latitude, double longitude, string cityName)
+        public async Task<WeatherData> GetWeather(string cityName)
         {
             string key = cityName.ToLower();
-            DateTime curr = DateTime.Now;
+            DateTime now = DateTime.Now;
 
-            if (cache.TryGetValue(key, out WeatheCache entry))
+            if (cache.TryGetValue(key, out WeatheCache cachedData))
             {
-                if ((curr - entry.Timestamp) < CacheDuration)
+                if ((now - cachedData.Timestamp) < CacheDuration)
                 {
-                    return entry.WeatherData;
+                    Console.WriteLine("Returning cached data.");
+                    return cachedData.WeatherData;
                 }
-                if ((curr - entry.Timestamp) < RateLimitDuration)
+
+                if ((now - cachedData.Timestamp) < RateLimitDuration)
                 {
                     throw new Exception("Rate limit exceeded. Please try again later.");
                 }
             }
 
-            WeatherData data = await weatherService.GetWeatherAsync(latitude, longitude, cityName);
-            cache[key] = new WeatheCache(data, curr);
-            return data;
+            Console.WriteLine("Fetching new data.");
+            WeatherData weatherData = await weatherService.GetWeather(cityName);
+            cache[key] = new WeatheCache(weatherData, now);
+
+            return weatherData;
         }
     }
 

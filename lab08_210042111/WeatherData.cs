@@ -21,7 +21,7 @@ namespace lab08_210042111
         public string LocationInformation{ get; set; }
    
 
-        public WeatherData(string CityName, double Latitude, double Longitude, string WeatherCondition, double WeatherTemperature) { 
+        public WeatherData(string CityName, string WeatherCondition, double WeatherTemperature) { 
             
             this.CityName = CityName;
             this.Latitude = Latitude;

@@ -10,13 +10,15 @@ namespace lab08_210042111
     {
        IWeatherService openWeatherMapAdapter;
        IWeatherService weatherStackAdapter;
+       WeatherServiceProxy proxyWeatherStack;
+       WeatherServiceProxy proxyOpenWeather;
 
         public WeatherFacade()
         {
             openWeatherMapAdapter = new OpenWeatherMapAdapter();
-
             weatherStackAdapter = new WeatherStackAdapters();
-
+            proxyOpenWeather = new WeatherServiceProxy(openWeatherMapAdapter);
+            proxyWeatherStack = new WeatherServiceProxy(weatherStackAdapter);
         }
         public async Task Start()
         {
@@ -28,31 +30,49 @@ namespace lab08_210042111
 
             Console.WriteLine("Select weather provider: 1. OpenWeatherMap, 2. WeatherStack");
             string model = Console.ReadLine();
+            IWeatherService selectedService;
 
-            if (model == "1") model = "openWeatherMap";
-            else if (model == "2") model = "weatherStack";
-            else model = "openWeatherMap";//setting this one as default
+            if (model == "1")
+            {
+                selectedService = proxyOpenWeather;
+            }
+            else if (model == "2")
+            {
+                selectedService = proxyWeatherStack;
+            }
+            else
+            {
+                selectedService = proxyOpenWeather; // default
+            }
 
-            WeatherData weatherData = await GetWeatherByCityAsync(city, model);
-            Console.WriteLine($"Weather in {city}: {weatherData.WeatherCondition}, {weatherData.WeatherTemperature}°C");
+
+            try
+            {
+                WeatherData weatherData = await selectedService.GetWeather(city);
+                Console.WriteLine($"Weather in {city}: {weatherData.WeatherCondition}, {weatherData.WeatherTemperature}°C");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
 
         }
         public async Task<WeatherData> GetWeatherByCityAsync(string city, string model)
         {
-            double latitude = 36.5; 
-            double longitude = 22;
+            //double latitude = 36.5; 
+            //double longitude = 22;
 
             if (model == "openWeatherMap")
             {
-                return await openWeatherMapAdapter.GetWeatherAsync(latitude, longitude, city);
+                return await openWeatherMapAdapter.GetWeather(city);
             }
             else if (model == "weatherStack")
             {
-                return await weatherStackAdapter.GetWeatherAsync(latitude, longitude, city);
+                return await weatherStackAdapter.GetWeather(city);
             }
             else
             {
-                return await openWeatherMapAdapter.GetWeatherAsync(latitude, longitude, city);
+                return await openWeatherMapAdapter.GetWeather(city);
             }
         }
 
