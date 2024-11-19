@@ -10,7 +10,7 @@ namespace lab08_210042111
     public class WeatherServiceProxy : IWeatherService
     {
         private readonly IWeatherService weatherService;
-        private readonly Dictionary<string, Weathercache> _cache = new Dictionary<string, Weathercache>();
+        private readonly Dictionary<string, WeatheCache> cache = new Dictionary<string, WeatheCache>();
         private static TimeSpan CacheDuration = TimeSpan.FromMinutes(10);
         private static readonly TimeSpan RateLimitDuration = TimeSpan.FromSeconds(30);
 
@@ -24,7 +24,7 @@ namespace lab08_210042111
             string key = cityName.ToLower();
             DateTime curr = DateTime.Now;
 
-            if (_cache.TryGetValue(key, out Weathercache entry))
+            if (cache.TryGetValue(key, out WeatheCache entry))
             {
                 if ((curr - entry.Timestamp) < CacheDuration)
                 {
@@ -37,7 +37,7 @@ namespace lab08_210042111
             }
 
             WeatherData data = await weatherService.GetWeatherAsync(latitude, longitude, cityName);
-            _cache[key] = new Weathercache(data, curr);
+            cache[key] = new WeatheCache(data, curr);
             return data;
         }
     }

@@ -11,19 +11,32 @@ namespace lab08_210042111
        IWeatherService openWeatherMapAdapter;
        IWeatherService weatherStackAdapter;
 
-        string service;
-
         public WeatherFacade()
         {
             openWeatherMapAdapter = new OpenWeatherMapAdapter();
 
             weatherStackAdapter = new WeatherStackAdapters();
 
-           
+        }
+        public async Task Start()
+        {
 
+            string city;
+            Console.WriteLine("Enter the city name:");
+            city = Console.ReadLine();
+
+
+            Console.WriteLine("Select weather provider: 1. OpenWeatherMap, 2. WeatherStack");
+            string model = Console.ReadLine();
+
+            if (model == "1") model = "openWeatherMap";
+            else if (model == "2") model = "weatherStack";
+            else model = "openWeatherMap";//setting this one as default
+
+            WeatherData weatherData = await GetWeatherByCityAsync(city, model);
+            Console.WriteLine($"Weather in {city}: {weatherData.WeatherCondition}, {weatherData.WeatherTemperature}°C");
 
         }
-
         public async Task<WeatherData> GetWeatherByCityAsync(string city, string model)
         {
             double latitude = 36.5; 

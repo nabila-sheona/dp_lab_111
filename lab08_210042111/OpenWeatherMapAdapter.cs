@@ -16,7 +16,7 @@ namespace lab08_210042111
 
         public async Task<WeatherData> GetWeatherAsync(double latitude, double longitude, string cityName)
         {
-            string apiUrl = $"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={ApiKey}&units=metric";
+            string apiUrl = $"https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={ApiKey}&units=metric";
             string response = await SendGetRequestAsync(apiUrl);
 
             JObject json = JObject.Parse(response);

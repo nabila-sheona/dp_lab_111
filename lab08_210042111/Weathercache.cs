@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace lab08_210042111
 {
-    public class Weathercache
+    public class WeatheCache
     {
         public WeatherData WeatherData { get; }
         public DateTime Timestamp { get; }
 
-        public Weathercache(WeatherData weatherData, DateTime timestamp)
+        public WeatheCache(WeatherData weatherData, DateTime timestamp)
         {
             WeatherData = weatherData;
             Timestamp = timestamp;

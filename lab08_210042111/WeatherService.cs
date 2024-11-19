@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,34 +8,45 @@ namespace lab08_210042111
 {
     public class WeatherService
     {
-        WeatherFacade weatherFacade;
 
-        public WeatherService(WeatherFacade weatherFacade) {
-
-            this.weatherFacade = weatherFacade; 
-        
-        }
-
-
-        public async Task Start()
+        WeatherFacade weatherFacade = new WeatherFacade();
+        bool exit = false;
+        public void Go()
         {
-           
-            string city;
-            Console.WriteLine("Enter the city name:");
-            city = Console.ReadLine();
+            while (!exit)
+            {
+                Console.WriteLine("1. Check weather by city");
+                Console.WriteLine("2. Exit");
 
+                Console.Write("Enter your choice: ");
 
-            Console.WriteLine("Select weather provider: 1. OpenWeatherMap, 2. WeatherStack");
-            string model = Console.ReadLine() == "1" ? "openWeatherMap" : "weatherStack";
+                string choice = Console.ReadLine();
 
-            
-                WeatherData weatherData = await weatherFacade.GetWeatherByCityAsync(city, model);
-                Console.WriteLine($"Weather in {city}: {weatherData.WeatherCondition}, {weatherData.WeatherTemperature}°C");
-            
+                switch (choice)
+                {
+                    case "1":
+                        weatherFacade.Start().Wait();
+                        break;
+                    case "2":
+                        exit = true;
+                        Console.WriteLine("Exiting.");
+                        break;
+                    default:
+                        Console.WriteLine("Try again.");
+                        break;
+                }
+
+                if (!exit)
+                {
+                    Console.WriteLine("Would you like to perform another operation? (y/n)");
+                    string option = Console.ReadLine();
+                    if (option != "y")
+                    {
+                        exit = true;
+                        Console.WriteLine("Program closing");
+                    }
+                }
+            }
         }
-
-       
-
-      
     }
 }

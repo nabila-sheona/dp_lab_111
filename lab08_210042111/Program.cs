@@ -10,14 +10,9 @@ namespace lab08_210042111
     {
         static void Main(string[] args)
         {
+           WeatherService weatherService = new WeatherService();
 
-            WeatherFacade weatherFacade = new WeatherFacade();
-            WeatherService weatherService = new WeatherService(weatherFacade);
-
-            weatherService.Start();
-
-
-            Console.ReadKey();
+            weatherService.Go();
         }
     }
 }
