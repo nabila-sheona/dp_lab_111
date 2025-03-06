@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace lab10_210042111
 {
-    public class DepositCommand: ICommand
+    public class DepositCommand : ICommand
     {
-        public BankAccount Account { get;}
+        public BankAccount Account { get; }
         private double amount;
 
         public DepositCommand(BankAccount account, double amount)
@@ -17,6 +17,7 @@ namespace lab10_210042111
             Account = account;
             this.amount = amount;
         }
+
         public bool Execute()
         {
             Account.Deposit(amount);

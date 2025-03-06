@@ -10,30 +10,29 @@ namespace lab10_210042111
     public class BankOperationExecutor
     {
         private ICommand command;
-        public string details;
+        private string details;
+        private readonly List<string> commandHistory = new List<string>();
 
-        private readonly Dictionary<ICommand, string> commandHistory = new Dictionary<ICommand, string>();
-        public void SetCommand(ICommand command, string details) {
+        public void SetCommand(ICommand command, string details)
+        {
             this.command = command;
             this.details = details;
-            
         }
-
-        
 
         public void ExecuteCommand()
         {
-
-           bool val= command.Execute();
-            if (val)
-            { commandHistory.Add(command, details); }
+            if (command.Execute())
+            {
+                commandHistory.Add(details);
+            }
         }
 
-        public void PrintCommandStack()
+        public void PrintCommandHistory()
         {
-            foreach(var entity in commandHistory)
+            Console.WriteLine("\nCommand History:");
+            foreach (var entry in commandHistory)
             {
-                Console.WriteLine(entity);
+                Console.WriteLine(entry);
             }
         }
     }

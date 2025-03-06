@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace lab10_210042111
 {
-    public class WithdrawCommand: ICommand
+
+    public class WithdrawCommand : ICommand
     {
         public BankAccount Account { get; }
         private double amount;
-        public bool done;
 
         public WithdrawCommand(BankAccount account, double amount)
         {
@@ -20,17 +20,7 @@ namespace lab10_210042111
 
         public bool Execute()
         {
-            Account.Withdraw(amount);
-            if (amount > Account.balance) {
-               done=false;
-                return false;
-
-            }
-            else
-            {
-             
-                return true;
-            }
+            return Account.Withdraw(amount);
         }
     }
 }

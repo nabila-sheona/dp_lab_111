@@ -6,36 +6,28 @@ using System.Threading.Tasks;
 
 namespace lab10_210042111
 {
-    public class Transfer:ICommand
+    public class TransferCommand : ICommand
     {
-        public BankAccount Account { get; }
-        public BankAccount Account2 { get; }
-        public double amount;
-        public bool done;
+        public BankAccount FromAccount { get; }
+        public BankAccount ToAccount { get; }
+        private double amount;
 
-        public Transfer(BankAccount account, BankAccount account2, double amount)
+        public TransferCommand(BankAccount fromAccount, BankAccount toAccount, double amount)
         {
-            Account = account;
-            Account2 = account2;
+            FromAccount = fromAccount;
+            ToAccount = toAccount;
             this.amount = amount;
         }
 
         public bool Execute()
         {
-           
-            Account.Withdraw(amount);
-            if (amount > Account.balance)
+            if (FromAccount.Withdraw(amount))
             {
-                done = false;
-               
-                return false;
-
-            }
-            else
-            {
-                Account2.Deposit(amount);
+                ToAccount.Deposit(amount);
+                Console.WriteLine($"Transferred {amount} from {FromAccount.AccountNumber} to {ToAccount.AccountNumber}.");
                 return true;
             }
+            return false;
         }
     }
 }

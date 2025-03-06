@@ -9,42 +9,38 @@ namespace lab10_210042111
     public class BankAccount
     {
         public string AccountNumber { get; }
-        public double balance;
+        public double Balance { get; private set; }
 
-        public BankAccount(string accountNumber, double balance)
+        public BankAccount(string accountNumber, double initialBalance)
         {
             AccountNumber = accountNumber;
-            this.balance = balance;
+            Balance = initialBalance;
         }
+
         public void Deposit(double amount)
         {
-            balance += amount;
-
+            Balance += amount;
+            Console.WriteLine($"{amount} deposited to {AccountNumber}. New Balance: {Balance}");
         }
+
         public bool Withdraw(double amount)
         {
-            if (amount < balance)
+            if (amount <= Balance)
             {
-                balance -= amount;
-
-                Console.WriteLine($"withdraw {amount} from {AccountNumber}");
+                Balance -= amount;
+                Console.WriteLine($"{amount} withdrawn from {AccountNumber}. New Balance: {Balance}");
                 return true;
             }
-
             else
             {
-                Console.WriteLine("Insufficient amount.");
+                Console.WriteLine("Insufficient funds.");
                 return false;
             }
-
-
         }
-       
 
         public void GetBalance()
         {
-            Console.WriteLine($"Account {AccountNumber} balance: {balance}.");
+            Console.WriteLine($"Account {AccountNumber} balance: {Balance}.");
         }
-
     }
 }
