@@ -43,15 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountCreatedEvent.cs" />
+    <Compile Include="AccountReadRepository.cs" />
+    <Compile Include="AccountWriteRepository.cs" />
     <Compile Include="BankAccount.cs" />
     <Compile Include="BankOperationExecutor.cs" />
+    <Compile Include="CalculateInterestCommand.cs" />
     <Compile Include="CreateAccountCommand.cs" />
     <Compile Include="DepositCommand.cs" />
+    <Compile Include="DepositEvent.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="EventBus.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="IEvent.cs" />
+    <Compile Include="InterestCalculatedEvent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transfer.cs" />
+    <Compile Include="TransferEvent.cs" />
+    <Compile Include="WithdrawalEvent.cs" />
     <Compile Include="WithdrawCommand.cs" />
   </ItemGroup>
   <ItemGroup>

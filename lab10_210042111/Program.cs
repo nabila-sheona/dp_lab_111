@@ -10,43 +10,80 @@ namespace lab10_210042111
     {
         static void Main(string[] args)
         {
+            // Setup read repository and subscribe to events
+            AccountReadRepository readRepo = new AccountReadRepository();
+            EventBus.Subscribe((e) =>
+            {
+                switch (e)
+                {
+                    case AccountCreatedEvent ace:
+                        readRepo.UpdateBalance(ace.AccountNumber, ace.InitialBalance);
+                        readRepo.AddTransaction($"Account {ace.AccountNumber} created with balance {ace.InitialBalance} at {ace.Timestamp}");
+                        break;
+                    case DepositEvent de:
+                        double newBalance = readRepo.AccountBalances.ContainsKey(de.AccountNumber)
+                            ? readRepo.AccountBalances[de.AccountNumber] + de.Amount
+                            : de.Amount;
+                        readRepo.UpdateBalance(de.AccountNumber, newBalance);
+                        readRepo.AddTransaction($"Deposited {de.Amount} to {de.AccountNumber} at {de.Timestamp}");
+                        break;
+                    case WithdrawalEvent we:
+                        readRepo.AddTransaction($"Withdrew {we.Amount} from {we.AccountNumber} at {we.Timestamp}");
+                        break;
+                    case TransferEvent te:
+                        readRepo.AddTransaction($"Transferred {te.Amount} from {te.FromAccount} to {te.ToAccount} at {te.Timestamp}");
+                        break;
+                    case InterestCalculatedEvent ie:
+                        readRepo.AddTransaction($"Interest {ie.InterestAmount} calculated for {ie.AccountNumber} at {ie.Timestamp}");
+                        break;
+                }
+            });
 
-
-            BankAccount account1 = new BankAccount("acc001", 1000);
-            BankAccount account2 = new BankAccount("acc002", 500);
+            // Write repository (for demonstration)
+            AccountWriteRepository writeRepo = new AccountWriteRepository();
 
             BankOperationExecutor executor = new BankOperationExecutor();
 
             // Create accounts
-            ICommand createAccount1 = new CreateAccountCommand(account1);
-            executor.SetCommand(createAccount1, $"Created account {account1.AccountNumber} with initial balance {account1.Balance}");
+            BankAccount acc1 = new BankAccount("acc101", 1000);
+            BankAccount acc2 = new BankAccount("acc102", 500);
+            writeRepo.Add(acc1);
+            writeRepo.Add(acc2);
+
+            ICommand createAcc1 = new CreateAccountCommand(acc1);
+            executor.SetCommand(createAcc1, $"Created account {acc1.AccountNumber} with initial balance {acc1.Balance}");
             executor.ExecuteCommand();
 
-            ICommand createAccount2 = new CreateAccountCommand(account2);
-            executor.SetCommand(createAccount2, $"Created account {account2.AccountNumber} with initial balance {account2.Balance}");
+            ICommand createAcc2 = new CreateAccountCommand(acc2);
+            executor.SetCommand(createAcc2, $"Created account {acc2.AccountNumber} with initial balance {acc2.Balance}");
             executor.ExecuteCommand();
 
-            // Deposit to account1
-            ICommand deposit = new DepositCommand(account1, 200);
-            executor.SetCommand(deposit, $"Deposited 200 to account {account1.AccountNumber}");
+            // Deposit command
+            ICommand depositCmd = new DepositCommand(acc1, 250);
+            executor.SetCommand(depositCmd, $"Deposited 250 to {acc1.AccountNumber}");
             executor.ExecuteCommand();
 
-            // Withdraw from account1
-            ICommand withdraw = new WithdrawCommand(account1, 150);
-            executor.SetCommand(withdraw, $"Withdrew 150 from account {account1.AccountNumber}");
+            // Withdraw command
+            ICommand withdrawCmd = new WithdrawCommand(acc1, 100);
+            executor.SetCommand(withdrawCmd, $"Withdrew 100 from {acc1.AccountNumber}");
             executor.ExecuteCommand();
 
-            // Transfer from account1 to account2
-            ICommand transfer = new TransferCommand(account1, account2, 300);
-            executor.SetCommand(transfer, $"Transferred 300 from account {account1.AccountNumber} to {account2.AccountNumber}");
+            // Transfer command
+            ICommand transferCmd = new TransferCommand(acc1, acc2, 300);
+            executor.SetCommand(transferCmd, $"Transferred 300 from {acc1.AccountNumber} to {acc2.AccountNumber}");
             executor.ExecuteCommand();
 
-            // Print current balances
-            account1.GetBalance();
-            account2.GetBalance();
+            // Calculate interest on account 2 (5% rate)
+            ICommand interestCmd = new CalculateInterestCommand(acc2, 0.05);
+            executor.SetCommand(interestCmd, $"Calculated interest for {acc2.AccountNumber} at rate 5%");
+            executor.ExecuteCommand();
 
-            // Print command history
+            // Print command history (write model)
             executor.PrintCommandHistory();
+
+            // Print read model data
+            readRepo.PrintBalances();
+            readRepo.PrintTransactionHistory();
             Console.ReadKey();
 
 

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace lab10_210042111
 {
-    public interface ICommand
+    public interface IEvent
     {
-        bool Execute();
+        DateTime Timestamp { get; }
     }
 }

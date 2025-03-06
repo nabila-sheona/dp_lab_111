@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -11,17 +12,19 @@ namespace lab10_210042111
     {
         public BankAccount Account { get; }
         private double amount;
-
         public DepositCommand(BankAccount account, double amount)
         {
             Account = account;
             this.amount = amount;
         }
-
         public bool Execute()
         {
-            Account.Deposit(amount);
-            return true;
+            if (Account.Deposit(amount))
+            {
+                EventBus.Publish(new DepositEvent(Account.AccountNumber, amount));
+                return true;
+            }
+            return false;
         }
     }
 }

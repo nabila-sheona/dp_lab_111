@@ -29,10 +29,10 @@ namespace lab10_210042111
 
         public void PrintCommandHistory()
         {
-            Console.WriteLine("\nCommand History:");
-            foreach (var entry in commandHistory)
+            Console.WriteLine("\n[Write Model] Command History:");
+            foreach (var detail in commandHistory)
             {
-                Console.WriteLine(entry);
+                Console.WriteLine(detail);
             }
         }
     }

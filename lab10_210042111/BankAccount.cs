@@ -17,30 +17,33 @@ namespace lab10_210042111
             Balance = initialBalance;
         }
 
-        public void Deposit(double amount)
+        public bool Deposit(double amount)
         {
+            if (amount <= 0)
+            {
+                Console.WriteLine("Deposit amount must be positive.");
+                return false;
+            }
             Balance += amount;
             Console.WriteLine($"{amount} deposited to {AccountNumber}. New Balance: {Balance}");
+            return true;
         }
 
         public bool Withdraw(double amount)
         {
-            if (amount <= Balance)
+            if (amount <= 0)
             {
-                Balance -= amount;
-                Console.WriteLine($"{amount} withdrawn from {AccountNumber}. New Balance: {Balance}");
-                return true;
+                Console.WriteLine("Withdrawal amount must be positive.");
+                return false;
             }
-            else
+            if (amount > Balance)
             {
                 Console.WriteLine("Insufficient funds.");
                 return false;
             }
-        }
-
-        public void GetBalance()
-        {
-            Console.WriteLine($"Account {AccountNumber} balance: {Balance}.");
+            Balance -= amount;
+            Console.WriteLine($"{amount} withdrawn from {AccountNumber}. New Balance: {Balance}");
+            return true;
         }
     }
 }
